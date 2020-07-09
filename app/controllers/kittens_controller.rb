@@ -5,11 +5,20 @@ class KittensController < ApplicationController
   # GET /kittens.json
   def index
     @kittens = Kitten.all
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render @kittens}
+    end
   end
 
   # GET /kittens/1
   # GET /kittens/1.json
   def show
+    respond_to do |format|
+      format.html { render :show}
+      format.json { render @kitten }
+    end
   end
 
   # GET /kittens/new
@@ -56,7 +65,7 @@ class KittensController < ApplicationController
   def destroy
     @kitten.destroy
     respond_to do |format|
-      format.html { redirect_to kittens_url, notice: 'Kitten was successfully destroyed.' }
+      format.html { redirect_to kittens_url, notice: 'Kitten was successfully deleted :(.' }
       format.json { head :no_content }
     end
   end
